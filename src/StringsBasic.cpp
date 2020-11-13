@@ -1,6 +1,7 @@
 
 
 #include "StringsBasic.h"
+#include <cassert>
 
 using namespace std;
 
@@ -17,3 +18,22 @@ string IP4Defang::defangIPaddr(const string& address)
 	}
 	return result;
 }
+
+int NestingDepth::maxDepth(const std::string& s)
+{
+	int curD = 0;
+	int maxD = 0;
+	for (auto c : s) {
+		if (c == '(') {
+			curD++;
+		} else if (c == ')') {
+			curD--;
+		}
+		if (curD > maxD) {
+			maxD = curD;
+		}
+	}
+	assert(curD == 0);
+	return maxD;
+}
+

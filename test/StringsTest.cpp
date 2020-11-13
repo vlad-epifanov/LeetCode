@@ -23,3 +23,22 @@ TEST(Strings, test1) {
     EXPECT_EQ(result, "5[.]21[.]5[.]123");
 
 }
+
+/* Depth test cases:
+   "" - 0
+   "1" - 0
+   "(1)" - 1
+   
+*/
+TEST(Strings, nestingDepth) {
+    NestingDepth dCalc;
+
+    EXPECT_EQ(dCalc.maxDepth(""),0);
+    EXPECT_EQ(dCalc.maxDepth("1"),0);
+    EXPECT_EQ(dCalc.maxDepth("(1)"),1);
+    EXPECT_EQ(dCalc.maxDepth("(1)+(1)"),1);
+    EXPECT_EQ(dCalc.maxDepth("((1))"),2);
+    EXPECT_EQ(dCalc.maxDepth("((1)*(1))"),2);
+    EXPECT_EQ(dCalc.maxDepth("((1+2)+(1*3)+(1+(2+2)))"),3);
+
+}

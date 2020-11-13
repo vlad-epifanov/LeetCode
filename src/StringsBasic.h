@@ -26,3 +26,12 @@ class EXPORT_SYM IP4Defang {
 public:
     std::string defangIPaddr(const std::string& address);
 };
+
+
+/***************************************
+2) Maximum Nesting Depth of the Parentheses
+***************************************/
+class NestingDepth {
+public:
+    int maxDepth(const std::string& s);
+};
