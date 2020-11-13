@@ -10,7 +10,7 @@
 using namespace std;
 
 /***************************************
-Running Sum of 1d Array
+1) Running Sum of 1d Array
 https://leetcode.com/problems/running-sum-of-1d-array/
 
 Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
@@ -24,4 +24,13 @@ Output: [1,3,6,10]
 class EXPORT_SYM RunningSum {
 public:
     vector<int> runningSum(const vector<int>& nums);
+};
+
+/*
+2) Shuffle array
+*/
+
+class Shuffle {
+public:
+    vector<int> shuffle(vector<int>& nums, int n);
 };
