@@ -40,5 +40,4 @@ TEST(Strings, nestingDepth) {
     EXPECT_EQ(dCalc.maxDepth("((1))"),2);
     EXPECT_EQ(dCalc.maxDepth("((1)*(1))"),2);
     EXPECT_EQ(dCalc.maxDepth("((1+2)+(1*3)+(1+(2+2)))"),3);
-
 }
