@@ -13,36 +13,22 @@ bool DivGame::divisorGame(int N)
 }
 
 /* Solution:
-   Tracking: SelMin, SelMax, AbsMin, LastMax
-   Every step:
-            1) check LastMax vs Cur
-                -> update if needed
-                -> update SelMax if LastMax > SelMax
-                -> update SelMin && SelMax if LastMax - AbsMin > SelMax - SelMin
-            2) If cur < AbsMin: AbsMin = cur, LastMax = AbsMin - Resetting
-
  */
 int MaxProfit::maxProfit(const vector<int>& prices)
 {
     if (prices.size() <= 1) {
         return 0;
     }
-    int selMin(prices[0]), selMax(prices[0]), curMin(prices[0]), curMax(prices[0]);
+    int maxProfit = 0;
+    int curMin(prices[0]);
     for (size_t i = 1; i < prices.size(); ++i) {
         int curVal = prices[i];
-        if (curVal > curMax) {
-            curMax = curVal;
-            if (selMax < curMax) {
-                selMax = curMax;
-            }
-            if ((curMax - curMin) > (selMax - selMin)) {
-                selMin = curMin;
-                selMax = curMax;
-            }
-        }
         if (curVal < curMin) {
-            curMin = curMax = curVal;
+            curMin = curVal;
+        } else {
+            maxProfit = std::max(maxProfit, curVal - curMin);
         }
+
     }
-    return selMax - selMin;
+    return maxProfit;
 }
