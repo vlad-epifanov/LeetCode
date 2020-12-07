@@ -24,9 +24,10 @@ Explanation: There are two paths: 0 -> 1 -> 3 and 0 -> 2 -> 3.
 
 class EXPORT_SYM AllGraphPaths
 {
+    int m_lastNode;
     vector<vector<int>> m_graphPaths;
     vector<int> m_curPath;
-    void findPathFromNode(const int curNode);
+    void findPathFromNode(const int curNode, const Graph& graph);
 public:
     vector<vector<int>> allPathsSourceTarget(Graph& graph);
 };
