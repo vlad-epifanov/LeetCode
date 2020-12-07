@@ -1,9 +1,6 @@
 
 #pragma once
-#include <string>
-#include <vector>
-
-#define EXPORT_SYM __declspec(dllexport)
+#include "typedefs.h"
 
 // Used only for quick copy-paste to LeetCode - avoid in production!
 using namespace std;
