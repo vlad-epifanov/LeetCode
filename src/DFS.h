@@ -26,8 +26,7 @@ class EXPORT_SYM AllGraphPaths
 {
     int m_lastNode;
     vector<vector<int>> m_graphPaths;
-    vector<int> m_curPath;
-    void findPathFromNode(const int curNode, const Graph& graph);
+    void findPathFromNode(const int curNode, const Graph& graph, vector<int>& curPath);
 public:
     vector<vector<int>> allPathsSourceTarget(Graph& graph);
 };
