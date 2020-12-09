@@ -61,3 +61,40 @@ TEST(Greedy, pGrouper)
     result = pg.groupThePeople({3,1,2,3,2,3});
     EXPECT_EQ(result, Vec2D({{1},{2,4},{0,3,5}}));
 }
+
+/* LabelPartition test cases:
+   "" - {0}
+   "a" - {1}
+   "ab" - {1,1}
+   "aba" - {3}
+   "abacdc" - {3,3}
+   "abc" - {1,1,1}
+*/
+TEST(Greedy, partition)
+{
+    Partitionlabels lp;
+
+    auto result = lp.partitionLabels("");
+    EXPECT_THAT(result, ElementsAre(0));
+
+    result = lp.partitionLabels("a");
+    EXPECT_THAT(result, ElementsAre(1));
+
+    result = lp.partitionLabels("ab");
+    EXPECT_THAT(result, ElementsAre(1,1));
+
+    result = lp.partitionLabels("abc");
+    EXPECT_THAT(result, ElementsAre(1,1,1));
+
+    result = lp.partitionLabels("aba");
+    EXPECT_THAT(result, ElementsAre(3));
+
+    result = lp.partitionLabels("abacdc");
+    EXPECT_THAT(result, ElementsAre(3,3));
+
+    result = lp.partitionLabels("acbacbdc");
+    EXPECT_THAT(result, ElementsAre(8));
+
+    result = lp.partitionLabels("acbacbdcefefgeg");
+    EXPECT_THAT(result, ElementsAre(8,7));
+}

@@ -7,3 +7,4 @@
 
 using Graph = std::vector<std::vector<int>>;
 using Vec2D = std::vector<std::vector<int>>;
+using Vec = std::vector<int>;
