@@ -77,3 +77,39 @@ vector<int> Partitionlabels::partitionLabels(const string& S)
     return res;
 }
 
+/******************************************************************************/
+Vec2D ValidMatrix::restoreMatrix(vector<int>& rowSum, vector<int>& colSum)
+{
+    //2d result matrix, RowxCol
+    size_t numCol = colSum.size(), numRow = rowSum.size();
+    Vec2D result(numRow, vector<int>(numCol,0));
+
+    // from top-left to bottom-right, take smallest candidate at every step
+    int curRow = 0, curCol = 0;
+    while (curRow < numRow && curCol < numCol) {
+        if (rowSum[curRow] < colSum[curCol]) {
+            result[curRow][curCol] = rowSum[curRow];
+            colSum[curCol] -= rowSum[curRow];
+            curRow++;
+        } else {
+            result[curRow][curCol] = colSum[curCol];
+            rowSum[curRow] -= colSum[curCol];
+            curCol++;
+        }
+    }
+
+    return result;
+}
+
+/*
+Alternate solution with for loop (n^n iterations instead of 2n, but less branching):
+    for(int i=0;i<r.size();i++) {
+        for(int j=0;j<c.size();j++) {
+            int m=min(r[i],c[j]);
+            dp[i][j]=m;
+            r[i]-=m;
+            c[j]-=m;
+        }
+    }
+    return dp;
+*/

@@ -98,3 +98,20 @@ TEST(Greedy, partition)
     result = lp.partitionLabels("acbacbdcefefgeg");
     EXPECT_THAT(result, ElementsAre(8,7));
 }
+
+TEST(Greedy, testValidMatrix)
+{
+    ValidMatrix vm;
+
+    auto result = vm.restoreMatrix(Vec({5}), Vec({5}));
+    EXPECT_EQ(result, Vec2D({{5}}));
+
+    result = vm.restoreMatrix(Vec({1,5}), Vec({6}));
+    EXPECT_EQ(result, Vec2D({{1},{5}}));
+
+    result = vm.restoreMatrix(Vec({3,8}), Vec({4,7}));
+    EXPECT_EQ(result, Vec2D({{3,0}, {1,7}}));
+
+    result = vm.restoreMatrix(Vec({6,7,8}), Vec({8,7,6}));
+    EXPECT_EQ(result, Vec2D({{6,0,0}, {2,5,0}, {0,2,6}}));
+}
