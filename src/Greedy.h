@@ -88,3 +88,48 @@ class ValidMatrix {
 public:
     vector<vector<int>> restoreMatrix(vector<int>& rowSum, vector<int>& colSum);
 };
+
+/***************************************
+4) Minimum Add to Make Parentheses Valid
+https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/
+
+Given a string S of '(' and ')' parentheses, we add the minimum number of parentheses ( '(' or ')', and in any positions ) so that the resulting parentheses string is valid.
+
+Formally, a parentheses string is valid if and only if:
+
+It is the empty string, or
+It can be written as AB (A concatenated with B), where A and B are valid strings, or
+It can be written as (A), where A is a valid string.
+Given a parentheses string, return the minimum number of parentheses we must add to make the resulting string valid.
+
+Example:
+Input: "())"
+Output: 1
+
+*/
+
+class MakeValidParString {
+public:
+    int minAddToMakeValid(const string& S);
+};
+
+/***************************************
+5) Car Pooling
+https://leetcode.com/problems/car-pooling/
+
+You are driving a vehicle that has capacity empty seats initially available for passengers.
+The vehicle only drives east (ie. it cannot turn around and drive west.)
+Given a list of trips, trip[i] = [num_passengers, start_location, end_location] contains
+information about the i-th trip: the number of passengers that must be picked up, and the locations to pick them up and drop them off.
+The locations are given as the number of kilometers due east from your vehicle's initial location.
+Return true if and only if it is possible to pick up and drop off all passengers for all the given trips. 
+
+Example 1:
+Input: trips = [[2,1,5],[3,3,7]], capacity = 4
+Output: false
+*/
+
+class CarPool {
+public:
+    bool carPooling(vector<vector<int>>& trips, int capacity);
+};

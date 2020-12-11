@@ -115,3 +115,31 @@ TEST(Greedy, testValidMatrix)
     result = vm.restoreMatrix(Vec({6,7,8}), Vec({8,7,6}));
     EXPECT_EQ(result, Vec2D({{6,0,0}, {2,5,0}, {0,2,6}}));
 }
+
+TEST(Greedy, testParString)
+{
+    MakeValidParString vps;
+
+    EXPECT_EQ(vps.minAddToMakeValid(""),0);
+    EXPECT_EQ(vps.minAddToMakeValid("()"),0);
+    EXPECT_EQ(vps.minAddToMakeValid("("),1);
+    EXPECT_EQ(vps.minAddToMakeValid(")"),1);
+    EXPECT_EQ(vps.minAddToMakeValid("(()"),1);
+    EXPECT_EQ(vps.minAddToMakeValid("()))"),2);
+    EXPECT_EQ(vps.minAddToMakeValid("((())"),1);
+    EXPECT_EQ(vps.minAddToMakeValid("((())(("),3);
+}
+
+TEST(Greedy, testCarPool)
+{
+    CarPool cp;
+
+    EXPECT_TRUE(cp.carPooling(Vec2D({{1,1,1}}),1));
+    EXPECT_TRUE(cp.carPooling(Vec2D({{1,1,2}}),1));
+    EXPECT_TRUE(cp.carPooling(Vec2D({{0,1,2}}),1));
+    EXPECT_FALSE(cp.carPooling(Vec2D({{2,1,2}}),1));
+    EXPECT_TRUE(cp.carPooling(Vec2D({{2,1,2},{2,3,4}}),2));
+    EXPECT_FALSE(cp.carPooling(Vec2D({{2,1,5},{2,3,6}}),2));
+    EXPECT_TRUE(cp.carPooling(Vec2D({{2,1,5},{2,3,6}}),4));
+    EXPECT_TRUE(cp.carPooling(Vec2D({{3,2,7},{3,7,9},{8,3,9}}),11));
+}

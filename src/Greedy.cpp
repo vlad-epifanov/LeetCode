@@ -1,5 +1,6 @@
 #include "Greedy.h"
 #include <unordered_map>
+#include <map>
 
 using Hash = unordered_map<int, std::vector<int>>;
 
@@ -113,3 +114,43 @@ Alternate solution with for loop (n^n iterations instead of 2n, but less branchi
     }
     return dp;
 */
+
+/******************************************************************************/
+int MakeValidParString::minAddToMakeValid(const string& S)
+{
+    //Approach:
+    //1) Open - balance +1, close - balance -1. If go negative - count and go back to 0
+    //2) In the end - add balance to negative counter
+    int balance = 0, negCounter = 0;
+    for (auto c : S) {
+        balance += (c == '(') ? 1 : -1;
+        if (balance < 0) {
+            negCounter++;
+            balance = 0;
+        }
+    }
+    return balance + negCounter;
+}
+
+/**********************************************************************/
+// Assumption: input is always correct
+bool CarPool::carPooling(vector<vector<int>>& trips, int capacity)
+{
+    //Approach: ordered map, where we cache load/unload stops
+    // map kilometer to passengers balance
+    // + - passengers come in
+    // - - passengers come out
+    map<int,int> stops;
+    for (auto& trip: trips) {
+        stops[trip[1]] += trip[0];
+        stops[trip[2]] -= trip[0];
+    }
+    int curLoad = 0;
+    for (auto& [stop, passBalance] : stops) {
+        curLoad += passBalance;
+        if (curLoad > capacity) {
+            return false;
+        }
+    }
+    return true;
+}
