@@ -45,3 +45,17 @@ TEST(Arrays, testQuery) {
     result = query.getValue(3,1);
     EXPECT_EQ(result, 5);
 }
+
+TEST(Arrays, testMostWater)
+{
+    MostWater mwCalc;
+
+    EXPECT_EQ(mwCalc.maxArea(Vec({1})), 0);
+    EXPECT_EQ(mwCalc.maxArea(Vec({1,1})), 1);
+    EXPECT_EQ(mwCalc.maxArea(Vec({1,2,1,3})), 4);
+    EXPECT_EQ(mwCalc.maxArea(Vec({2,4,3})), 4);
+    EXPECT_EQ(mwCalc.maxArea(Vec({1,1,1})), 2);
+    EXPECT_EQ(mwCalc.maxArea(Vec({1,3,3,2,1,1})), 5);
+}
+
+

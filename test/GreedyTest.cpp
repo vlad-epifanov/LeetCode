@@ -143,3 +143,19 @@ TEST(Greedy, testCarPool)
     EXPECT_TRUE(cp.carPooling(Vec2D({{2,1,5},{2,3,6}}),4));
     EXPECT_TRUE(cp.carPooling(Vec2D({{3,2,7},{3,7,9},{8,3,9}}),11));
 }
+
+TEST(Greedy, testStringBreaker)
+{
+    StringBreaker sb;
+
+    EXPECT_TRUE(sb.checkIfCanBreak(string("a"), string("a")));
+    EXPECT_TRUE(sb.checkIfCanBreak(string("a"), string("b")));
+    EXPECT_TRUE(sb.checkIfCanBreak(string("b"), string("a")));
+    EXPECT_TRUE(sb.checkIfCanBreak(string("aa"), string("aa")));
+    EXPECT_TRUE(sb.checkIfCanBreak(string("aa"), string("ab")));
+    EXPECT_TRUE(sb.checkIfCanBreak(string("bb"), string("aa")));
+    EXPECT_TRUE(sb.checkIfCanBreak(string("ba"), string("ac")));
+    EXPECT_FALSE(sb.checkIfCanBreak(string("da"), string("cc")));
+    EXPECT_TRUE(sb.checkIfCanBreak(string("abc"), string("cbd")));
+    EXPECT_FALSE(sb.checkIfCanBreak(string("adh"), string("bcd")));
+}

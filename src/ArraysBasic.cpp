@@ -51,3 +51,47 @@ int SubrectangleQueries::getValue(int row, int col)
 {
     return m_rectangle[row][col];
 }
+
+/************************************************************************************/
+// BF: check all pairs, pick max areas - O(n^2)
+// V1: moving maxes from out to inside
+/*
+int MostWater::maxArea(vector<int>& height)
+{
+    int lMax = height.front(), rMax = height.back();
+    int lPos = 0, rPos = height.size()-1;
+    int maxArea = 0;
+    
+    while (lPos < rPos) {
+
+        lMax = std::max(lMax, height[lPos]);
+        rMax = std::max(rMax, height[rPos]);
+        int area = std::min(lMax, rMax) * (rPos - lPos);
+        maxArea = std::max(maxArea, area);
+        if (lMax < rMax) {
+            lPos++;
+        } else {
+            rPos--;
+        }        
+    }
+
+    return maxArea;
+}
+*/
+
+//V2: just moving towards bigger from smaller and calc areas along the way
+int MostWater::maxArea(vector<int>& height)
+{
+    int lPos = 0, rPos = height.size()-1;
+    int maxArea = 0;
+    while (lPos < rPos) {
+        int area = std::min(height[lPos], height[rPos]) * (rPos - lPos);
+        maxArea = std::max(maxArea, area);
+        if (height[lPos] < height[rPos]) {
+            lPos++;
+        } else {
+            rPos--;
+        }        
+    }
+    return maxArea;
+}

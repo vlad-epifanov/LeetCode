@@ -1,6 +1,7 @@
 #include "Greedy.h"
 #include <unordered_map>
 #include <map>
+#include <algorithm>
 
 using Hash = unordered_map<int, std::vector<int>>;
 
@@ -154,3 +155,42 @@ bool CarPool::carPooling(vector<vector<int>>& trips, int capacity)
     }
     return true;
 }
+
+/**********************************************************************/
+//Assumption - strings have the same size, all the symbols - lower-case latins
+// O(2n*logn) + O(n)
+bool StringBreaker::checkIfCanBreak(string& s1, string& s2)
+{
+    std::sort(s1.begin(), s1.end());
+    std::sort(s2.begin(), s2.end());
+    int champ = 0; // 0 - no champ, 1 - s1, 2 - s2
+    for (int i = 0; i < s1.size(); i++) {
+        if (s1[i] > s2[i]) {
+            if (champ == 2)
+                return false;
+            champ = 1;
+        } else if (s1[i] < s2[i]) {
+            if (champ == 1)
+                return false;
+            champ = 2;
+        }
+    }
+    return true;
+}
+
+/*
+Simpler code: count cases when s1 >= s2 and s2 >= s1 -
+and to break that number should be equal to L .
+int l = s1.length();
+int x = 0, y = 0;
+for(int i = 0; i < l; i++) {
+    if(s1[i] >= s2[i]) x++;
+    if(s1[i] <= s2[i]) y++;
+}
+if(x == l || y == l)
+    return true;
+return false;
+
+*/
+
+/**********************************************************************/
