@@ -67,9 +67,15 @@ n == mat[i].length
 
 *************/
 class MXBlockSum {
+
+    int _NRows = 0;
+    int _NCols = 0;
+
     void makeCumSum(Vec2D& mat);
     int getSubRangeSum(Vec2D& mat, int r, int c, int K);
     int getElem(Vec2D& mat, int r, int c);
+
 public:
+
     Vec2D matrixBlockSum(Vec2D& mat, int K);
 };
