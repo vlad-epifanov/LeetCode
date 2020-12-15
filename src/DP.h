@@ -30,7 +30,7 @@ public:
 };
 
 /***************************************
-1) Buying stocks
+2) Buying stocks
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 
 Say you have an array for which the ith element is the price of a given stock on day i.
@@ -46,4 +46,30 @@ Output: 5
 class MaxProfit {
 public:
     int maxProfit(const vector<int>& prices);
+};
+
+/***************************************
+3) Matrix Block Sum
+https://leetcode.com/problems/matrix-block-sum/
+
+Given a m * n matrix mat and an integer K, return a matrix answer where each answer[i][j] is the sum of all elements 
+mat[r][c] for i - K <= r <= i + K, j - K <= c <= j + K, and (r, c) is a valid position in the matrix.
+ 
+Example 1:
+
+Input: mat = [[1,2,3],[4,5,6],[7,8,9]], K = 1
+Output: [[12,21,16],[27,45,33],[24,39,28]]
+
+m == mat.length
+n == mat[i].length
+1 <= m, n, K <= 100
+1 <= mat[i][j] <= 100
+
+*************/
+class MXBlockSum {
+    void makeCumSum(Vec2D& mat);
+    int getSubRangeSum(Vec2D& mat, int r, int c, int K);
+    int getElem(Vec2D& mat, int r, int c);
+public:
+    Vec2D matrixBlockSum(Vec2D& mat, int K);
 };
