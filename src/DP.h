@@ -79,3 +79,20 @@ public:
 
     Vec2D matrixBlockSum(Vec2D& mat, int K);
 };
+
+
+/***************************************
+4)  Counting Bits
+https://leetcode.com/problems/counting-bits/
+
+Given a non negative integer number num. For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1's in their binary representation and return them as an array.
+
+Example 1:
+Input: 2
+Output: [0,1,1]
+*/
+
+class CountBits {
+public:
+    vector<int> countBits(int num);
+};

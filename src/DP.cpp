@@ -80,3 +80,22 @@ Vec2D MXBlockSum::matrixBlockSum(Vec2D& mat, int K)
     }    
     return result;
 }
+
+vector<int> CountBits::countBits(int num)
+{
+    vector<int> res(num+1,0);
+    if (num == 0) {
+        return res;
+    }
+    // Approach: running "back-offset", increasing every time by 2 when we reach it pos
+    // And take value from "-offset+1"
+    int offset = 1;
+    for (int i = 1; i <= num; ++i) {
+        if (i == offset*2) {
+            offset = i;
+        }
+        res[i] = res[i-offset] + 1;
+    }
+
+    return res;
+}

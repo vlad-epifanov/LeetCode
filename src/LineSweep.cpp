@@ -15,6 +15,7 @@ Suggested solution:
 Alternate solution:
  - use vector<pair<int,int>> instead of multimap and sort it - the same O(nlogn)
  but will be more memory-efficient/cache-friendly
+ - use negative heights for insert and positive for removal: this way we can get proper sorting with the max value per step, so no need to track curPos / lastPos
 */
 
 multimap<int,int> SkyLine::calculateEventQueue(Vec2D& buildings)
