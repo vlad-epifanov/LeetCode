@@ -56,4 +56,13 @@ TEST(DP, CountBitSet)
     EXPECT_EQ(res,Vec({0,1,1,2,1,2,2,3,1}));
 }
 
+TEST(DP, CountSortedVowelsTest)
+{
+    CountSortedVowels cvs;
 
+    EXPECT_EQ(cvs.countVowelStrings(0),0);
+    EXPECT_EQ(cvs.countVowelStrings(1),5);
+    EXPECT_EQ(cvs.countVowelStrings(2),15);
+    EXPECT_EQ(cvs.countVowelStrings(3),35);
+    EXPECT_EQ(cvs.countVowelStrings(33),66045);
+}

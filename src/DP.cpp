@@ -1,7 +1,6 @@
-
-
 #include "DP.h"
 #include <cassert>
+#include <numeric>
 
 using namespace std;
 
@@ -67,8 +66,8 @@ int MXBlockSum::getSubRangeSum(Vec2D& mat, int r, int c, int K)
 
 Vec2D MXBlockSum::matrixBlockSum(Vec2D& mat, int K)
 {
-    _NRows = mat.size();
-    _NCols = mat.front().size();
+    _NRows = static_cast<int>(mat.size());
+    _NCols = static_cast<int>(mat.front().size());
     // Prepare CumSum matrix from original matrix
     this->makeCumSum(mat);
 
@@ -98,4 +97,25 @@ vector<int> CountBits::countBits(int num)
     }
 
     return res;
+}
+
+int CountSortedVowels::countVowelStrings(int n) 
+{
+    if (n == 0) {
+        return 0;
+    }
+
+    int totalCount = 5;
+    vector<int> curIterCounters(5,0), prevIterCounters(5,1);
+    for (int i = 1; i < n; i++) {
+        curIterCounters[0] = totalCount;
+        curIterCounters[1] = prevIterCounters[1] + prevIterCounters[2] + prevIterCounters[3] + prevIterCounters[4];
+        curIterCounters[2] = prevIterCounters[2] + prevIterCounters[3] + prevIterCounters[4];
+        curIterCounters[3] = prevIterCounters[3] + prevIterCounters[4];
+        curIterCounters[4] = prevIterCounters[4];
+        totalCount = std::accumulate(curIterCounters.begin(), curIterCounters.end(), 0);
+        prevIterCounters.swap(curIterCounters);
+    }
+    return totalCount;
+    
 }
