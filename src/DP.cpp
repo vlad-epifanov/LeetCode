@@ -164,8 +164,8 @@ int SquareCounterLoop::getFromCache(const Vec2D& cache, const int row, const int
 }
 int SquareCounterLoop::countSquares(Vec2D& matrix)
 {
-    const int M = matrix.size();
-    const int N = matrix.front().size();
+    const int M = static_cast<int>(matrix.size());
+    const int N = static_cast<int>(matrix.front().size());
     Vec2D cache(M, vector<int>(N, 0));
     
     int totalCount = 0;
@@ -183,12 +183,12 @@ int SquareCounterLoop::countSquares(Vec2D& matrix)
     return totalCount;
 }
 
-/* Tuned Bottom-up */
+/* Turned Bottom-up */
 
 int SquareCounterLoop2::countSquares(Vec2D& matrix)
 {
-    const int M = matrix.size();
-    const int N = matrix.front().size();
+    const int M = static_cast<int>(matrix.size());
+    const int N = static_cast<int>(matrix.front().size());
     int totalCount = 0;
     for (int r = 0; r < M; ++r) {
         for (int c = 0; c < N; ++c) {
@@ -199,4 +199,42 @@ int SquareCounterLoop2::countSquares(Vec2D& matrix)
         }
     }
     return totalCount;
+}
+
+/***********************************************************************************/
+
+int MinTicketsCost::getMinCost(const int startDayPos)
+{
+    if (_cache[startDayPos] == 0) {
+        _cache[startDayPos] = std::min({getMinCost(startDayPos, 1, _costs[0]),
+                     getMinCost(startDayPos, 7, _costs[1]),
+                     getMinCost(startDayPos, 30, _costs[2])});
+    }
+    return _cache[startDayPos];
+}
+
+int MinTicketsCost::getMinCost(const int startDayPos, const int daysInPass, const int passCost)
+{
+    int startDay = _days[startDayPos];
+    int afterPassDay = startDay + daysInPass;
+    if (afterPassDay > _days.back())
+        return passCost;
+
+    int nextDayPos = startDayPos;
+    while (_days[nextDayPos] < afterPassDay) {
+        nextDayPos++;
+    }
+
+    return passCost + getMinCost(nextDayPos);
+}
+
+int MinTicketsCost::mincostTickets(vector<int>& days, vector<int>& costs) 
+{
+    if(days.empty())
+        return 0;
+    _days.swap(days);
+    _costs.swap(costs);
+    _cache.clear();
+    _cache.resize(_days.size(), 0);
+    return getMinCost(0);
 }

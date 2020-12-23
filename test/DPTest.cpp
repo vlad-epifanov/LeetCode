@@ -105,3 +105,20 @@ TEST(DP, BinaryMatrixTest3)
     EXPECT_EQ(sc.countSquares(Vec2D({{1,0},{1,1},{1,1}})),6);
     EXPECT_EQ(sc.countSquares(Vec2D({{1,0,1},{1,1,1},{1,1,1}})),10);
 }
+
+TEST(DP, MinCostTicketsTest)
+{
+    MinTicketsCost mtc;
+
+    EXPECT_EQ(mtc.mincostTickets(Vec({}),Vec({})),0);
+    EXPECT_EQ(mtc.mincostTickets(Vec({1}),Vec({1,3,5})),1);
+    EXPECT_EQ(mtc.mincostTickets(Vec({1,2,3,5}),Vec({1,3,5})),3);
+    EXPECT_EQ(mtc.mincostTickets(Vec({1,5}),Vec({1,3,5})),2);
+    EXPECT_EQ(mtc.mincostTickets(Vec({1,5,10,15,20,28}),Vec({1,3,5})),5);
+    EXPECT_EQ(mtc.mincostTickets(Vec({1,4,6,7,8,20}),Vec({2,7,15})),11);
+    EXPECT_EQ(mtc.mincostTickets(Vec(
+        {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,
+        31,32,33,34,35,36,37,38,39,40,45,50,55,65,70,75,80,85}),Vec({1,3,5})),15);
+}
+
+
