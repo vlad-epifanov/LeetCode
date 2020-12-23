@@ -114,3 +114,45 @@ class CountSortedVowels {
 public:
     int countVowelStrings(int n);
 };
+
+/*
+6) Count Square Submatrices with All Ones
+https://leetcode.com/problems/count-square-submatrices-with-all-ones/
+
+Given a m * n matrix of ones and zeros, return how many square submatrices have all ones.
+
+Example 1:
+Input: matrix =
+[
+  [0,1,1,1],
+  [1,1,1,1],
+  [0,1,1,1]
+]
+Output: 15
+
+1 <= arr.length <= 300
+1 <= arr[0].length <= 300
+0 <= arr[i][j] <= 1
+*/
+
+class SquareCounter {
+    Vec2D _cache;
+    int _M;
+    int _N;
+    int getCountForCell(const Vec2D& matrix, const int row, const int col);
+public:
+    int countSquares(Vec2D& matrix);
+};
+
+class SquareCounterLoop {
+    int getFromCache(const Vec2D& cache, const int row, const int col);
+public:
+    int countSquares(Vec2D& matrix);
+};
+
+class SquareCounterLoop2 {
+public:
+    int countSquares(Vec2D& matrix);
+};
+
+// Try more! Reuse existent Matrix and Invert indices!

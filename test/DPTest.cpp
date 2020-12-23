@@ -66,3 +66,42 @@ TEST(DP, CountSortedVowelsTest)
     EXPECT_EQ(cvs.countVowelStrings(3),35);
     EXPECT_EQ(cvs.countVowelStrings(33),66045);
 }
+
+TEST(DP, BinaryMatrixTest)
+{
+    SquareCounter sc;
+
+    EXPECT_EQ(sc.countSquares(Vec2D({{0}})),0);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1}})),1);
+    EXPECT_EQ(sc.countSquares(Vec2D({{0,1}})),1);
+    EXPECT_EQ(sc.countSquares(Vec2D({{0,1},{1,0}})),2);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1,1},{1,1}})),5);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1,0},{1,1},{1,1}})),6);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1,0,1},{1,1,1},{1,1,1}})),10);
+}
+
+TEST(DP, BinaryMatrixTest2)
+{
+    SquareCounterLoop sc;
+
+    EXPECT_EQ(sc.countSquares(Vec2D({{0}})),0);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1}})),1);
+    EXPECT_EQ(sc.countSquares(Vec2D({{0,1}})),1);
+    EXPECT_EQ(sc.countSquares(Vec2D({{0,1},{1,0}})),2);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1,1},{1,1}})),5);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1,0},{1,1},{1,1}})),6);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1,0,1},{1,1,1},{1,1,1}})),10);
+}
+
+TEST(DP, BinaryMatrixTest3)
+{
+    SquareCounterLoop2 sc;
+
+    EXPECT_EQ(sc.countSquares(Vec2D({{0}})),0);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1}})),1);
+    EXPECT_EQ(sc.countSquares(Vec2D({{0,1}})),1);
+    EXPECT_EQ(sc.countSquares(Vec2D({{0,1},{1,0}})),2);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1,1},{1,1}})),5);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1,0},{1,1},{1,1}})),6);
+    EXPECT_EQ(sc.countSquares(Vec2D({{1,0,1},{1,1,1},{1,1,1}})),10);
+}

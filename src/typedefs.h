@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 #define EXPORT_SYM __declspec(dllexport)
 

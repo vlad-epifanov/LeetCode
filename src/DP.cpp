@@ -1,6 +1,7 @@
 #include "DP.h"
 #include <cassert>
 #include <numeric>
+#include <algorithm>
 
 using namespace std;
 
@@ -109,13 +110,93 @@ int CountSortedVowels::countVowelStrings(int n)
     vector<int> curIterCounters(5,0), prevIterCounters(5,1);
     for (int i = 1; i < n; i++) {
         curIterCounters[0] = totalCount;
-        curIterCounters[1] = prevIterCounters[1] + prevIterCounters[2] + prevIterCounters[3] + prevIterCounters[4];
-        curIterCounters[2] = prevIterCounters[2] + prevIterCounters[3] + prevIterCounters[4];
-        curIterCounters[3] = prevIterCounters[3] + prevIterCounters[4];
+        curIterCounters[1] = curIterCounters[0] - prevIterCounters[0];
+        curIterCounters[2] = curIterCounters[1] - prevIterCounters[1];
+        curIterCounters[3] = curIterCounters[2] - prevIterCounters[2];
         curIterCounters[4] = prevIterCounters[4];
         totalCount = std::accumulate(curIterCounters.begin(), curIterCounters.end(), 0);
         prevIterCounters.swap(curIterCounters);
     }
     return totalCount;
+}
+
+/***********************************************************************************************/
+/* Approach - calculate auxiliary matrix where i,i shows how many square matrices starts from this cell */
+//V1 - recursive:
+
+int SquareCounter::getCountForCell(const Vec2D& matrix, const int row, const int col)
+{
+    if (row >= _M || col >= _N || matrix[row][col] == 0)
+        return 0;
+    auto& cachedVal = _cache[row][col];
+    if (cachedVal == 0) {
+        cachedVal = 1 + std::min({getCountForCell(matrix, row+1, col), 
+                        getCountForCell(matrix, row+1, col+1),
+                        getCountForCell(matrix, row, col+1)});
+    }
+    return cachedVal;
+}
+
+int SquareCounter::countSquares(Vec2D& matrix)
+{
+    _M = static_cast<int>(matrix.size());
+    _N = static_cast<int>(matrix.front().size());
+    _cache.clear();
+    _cache.resize(_M, vector<int>(_N, 0));
+
+    int totalCount = 0;
+    for (int i = 0; i < _M; ++i) {
+        for (int j = 0; j < _N; ++j) {
+            totalCount += getCountForCell(matrix, i, j);
+        }
+    }
+
+    return totalCount;
+}
+
+/* Bottom-up approach via loop */
+
+int SquareCounterLoop::getFromCache(const Vec2D& cache, const int row, const int col)
+{
+    if (row >= cache.size() || col >= cache.front().size() || cache[row][col] == 0)
+        return 0;
+    return cache[row][col];
+}
+int SquareCounterLoop::countSquares(Vec2D& matrix)
+{
+    const int M = matrix.size();
+    const int N = matrix.front().size();
+    Vec2D cache(M, vector<int>(N, 0));
     
+    int totalCount = 0;
+    for (int r = M-1; r >= 0; --r) {
+        for (int c = N-1; c >= 0; --c) {
+            if (matrix[r][c] == 0)
+                continue;
+            cache[r][c] = 1 + std::min({getFromCache(cache, r,c+1),
+                                        getFromCache(cache, r+1,c+1),
+                                        getFromCache(cache, r+1,c),});
+            totalCount += cache[r][c];
+        }
+    }
+
+    return totalCount;
+}
+
+/* Tuned Bottom-up */
+
+int SquareCounterLoop2::countSquares(Vec2D& matrix)
+{
+    const int M = matrix.size();
+    const int N = matrix.front().size();
+    int totalCount = 0;
+    for (int r = 0; r < M; ++r) {
+        for (int c = 0; c < N; ++c) {
+            if (r>0 && c>0 && matrix[r][c]>0) {
+                matrix[r][c] = 1 + std::min({matrix[r-1][c], matrix[r-1][c-1], matrix[r][c-1]});
+            }
+            totalCount += matrix[r][c];
+        }
+    }
+    return totalCount;
 }
