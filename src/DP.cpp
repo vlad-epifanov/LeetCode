@@ -238,3 +238,23 @@ int MinTicketsCost::mincostTickets(vector<int>& days, vector<int>& costs)
     _cache.resize(_days.size(), 0);
     return getMinCost(0);
 }
+
+/***********************************************************************************/
+// Leverage cache containing maxSum for [0;i] subbarays
+// Every iteration - pick max sum, from (cache[i-1] + arr[i]) to (cache[i-k] + max(arr[i],...arr[i-k+1]))
+
+int PartitionMaxSum::maxSumAfterPartitioning(vector<int>& arr, int k)
+{
+    //indexation for cache is shifted to the right, for convenience of out-of-bounds checking
+    vector<int> maxCache(arr.size()+1,0);
+    for (int i = 0; i < arr.size(); ++i) {
+        int curMaxVal = arr[i];
+        maxCache[i+1] = curMaxVal;
+        for (int j = i; j >= std::max(i-k+1,0); --j) {
+            int subSeqSize = i-j+1;
+            curMaxVal = std::max(curMaxVal, arr[j]);
+            maxCache[i+1] = std::max(maxCache[i+1], maxCache[j] + curMaxVal*subSeqSize);
+        }
+    }
+    return maxCache.back();
+}

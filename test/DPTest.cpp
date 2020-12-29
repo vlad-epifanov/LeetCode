@@ -121,4 +121,13 @@ TEST(DP, MinCostTicketsTest)
         31,32,33,34,35,36,37,38,39,40,45,50,55,65,70,75,80,85}),Vec({1,3,5})),15);
 }
 
-
+TEST(DP, PMSTest)
+{
+    PartitionMaxSum pms;
+    EXPECT_EQ(pms.maxSumAfterPartitioning(Vec({0}), 1), 0);
+    EXPECT_EQ(pms.maxSumAfterPartitioning(Vec({2}), 1), 2);
+    EXPECT_EQ(pms.maxSumAfterPartitioning(Vec({1,2}), 1), 3);
+    EXPECT_EQ(pms.maxSumAfterPartitioning(Vec({1,2}), 2), 4);
+    EXPECT_EQ(pms.maxSumAfterPartitioning(Vec({1,10,1,15}), 3), 50);
+    EXPECT_EQ(pms.maxSumAfterPartitioning(Vec({1,15,7,9,2,5,10}), 3), 84);
+}
