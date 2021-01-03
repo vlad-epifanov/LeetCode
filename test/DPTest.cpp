@@ -131,3 +131,14 @@ TEST(DP, PMSTest)
     EXPECT_EQ(pms.maxSumAfterPartitioning(Vec({1,10,1,15}), 3), 50);
     EXPECT_EQ(pms.maxSumAfterPartitioning(Vec({1,15,7,9,2,5,10}), 3), 84);
 }
+
+TEST(DP, PSTest)
+{
+    PalindromeSubstrings ps;
+    EXPECT_EQ(ps.countSubstrings("a"), 1);
+    EXPECT_EQ(ps.countSubstrings("aaa"), 6);
+    EXPECT_EQ(ps.countSubstrings("abc"), 3);
+    EXPECT_EQ(ps.countSubstrings("aba"), 4);
+    EXPECT_EQ(ps.countSubstrings("ababa"), 9);
+    EXPECT_EQ(ps.countSubstrings("aabba"), 8);
+}

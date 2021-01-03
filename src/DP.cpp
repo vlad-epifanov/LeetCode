@@ -242,6 +242,7 @@ int MinTicketsCost::mincostTickets(vector<int>& days, vector<int>& costs)
 /***********************************************************************************/
 // Leverage cache containing maxSum for [0;i] subbarays
 // Every iteration - pick max sum, from (cache[i-1] + arr[i]) to (cache[i-k] + max(arr[i],...arr[i-k+1]))
+// O(n*k)
 
 int PartitionMaxSum::maxSumAfterPartitioning(vector<int>& arr, int k)
 {
@@ -257,4 +258,26 @@ int PartitionMaxSum::maxSumAfterPartitioning(vector<int>& arr, int k)
         }
     }
     return maxCache.back();
+}
+
+/*************************************************************************************/
+// Solution: DP-based, caching palindromes for quick calculation new palindromes.
+int PalindromeSubstrings::countSubstrings(const string& s)
+{
+    int strLen = s.size();
+    vector<vector<bool>> pCache(strLen,vector<bool>(strLen,false));
+
+    int psCounter = strLen;
+    for (int i = strLen-2; i >= 0; --i) {
+        for (int j = i+1; j < strLen; ++j) {
+            const bool isPalindrome = 
+                (s[i] == s[j]) &&       // symbols at the ends should be the same
+                 (j <= i+2 ||           // no need to check anything else for 2- and 3- chars substrings
+                  pCache[i+1][j-1]);    // ... and inner substring should be palindrome as well
+            pCache[i][j] = isPalindrome;
+            psCounter += isPalindrome ? 1 : 0;
+        }
+    }
+    
+    return psCounter;
 }
