@@ -142,3 +142,15 @@ TEST(DP, PSTest)
     EXPECT_EQ(ps.countSubstrings("ababa"), 9);
     EXPECT_EQ(ps.countSubstrings("aabba"), 8);
 }
+
+TEST(DP, MXOnesCounter)
+{
+    SubmatrixCounter smc;
+    EXPECT_EQ(smc.numSubmat(Vec2D({{1}})),1);
+    EXPECT_EQ(smc.numSubmat(Vec2D({{0}})),0);
+    EXPECT_EQ(smc.numSubmat(Vec2D({{0,1}})),1);
+    EXPECT_EQ(smc.numSubmat(Vec2D({{1,1}})),3);
+    EXPECT_EQ(smc.numSubmat(Vec2D({{1,1},{1,1}})),9);
+    EXPECT_EQ(smc.numSubmat(Vec2D({{1,1,0},{1,0,1},{1,1,1}})),15);
+    EXPECT_EQ(smc.numSubmat(Vec2D({{1,0,1,1,0,1},{0,1,1,1,0,1}})),16);
+}

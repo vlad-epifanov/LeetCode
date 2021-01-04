@@ -264,7 +264,7 @@ int PartitionMaxSum::maxSumAfterPartitioning(vector<int>& arr, int k)
 // Solution: DP-based, caching palindromes for quick calculation new palindromes.
 int PalindromeSubstrings::countSubstrings(const string& s)
 {
-    int strLen = s.size();
+    int strLen = static_cast<int>(s.size());
     vector<vector<bool>> pCache(strLen,vector<bool>(strLen,false));
 
     int psCounter = strLen;
@@ -280,4 +280,35 @@ int PalindromeSubstrings::countSubstrings(const string& s)
     }
     
     return psCounter;
+}
+
+/********************************************************************************/
+// Solution:
+// DP - histograms for every line. So we can use minimal height to detect rectangles
+// We'll be "dragging" the min-height row, adding height to number - since there will be "height" new rectangle every time
+// O(m) space, O(n*m^2) time
+int SubmatrixCounter::numSubmat(vector<vector<int>>& mat)
+{
+    const size_t N = mat.size(); // rows
+    const size_t M = mat.back().size(); // columns
+    
+    // Process row-by row - results for every row depend ONLY on results in the previous row
+    vector<int> heights(M, 0);
+    int totalCount = 0;
+    for (size_t i = 0; i < N; i++) {
+        for (size_t j = 0; j < M; j++) {
+            //update heights: if current cell is 0 - height is zero, otherwise - increase by one
+            heights[j] = mat[i][j] * (heights[j] + mat[i][j]);
+        }
+        //count rectangles
+        for (size_t j = 0; j < M; j++) {
+            int minHeight = heights[j];
+            //if current pos has non-zero height - start tracking'n'counting
+            for (size_t k = j; k < M && heights[k]; k++) {
+                minHeight = std::min(minHeight,heights[k]);
+                totalCount += minHeight;
+            }
+        }
+    }
+    return totalCount;
 }
