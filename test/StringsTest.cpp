@@ -41,3 +41,18 @@ TEST(Strings, nestingDepth) {
     EXPECT_EQ(dCalc.maxDepth("((1)*(1))"),2);
     EXPECT_EQ(dCalc.maxDepth("((1+2)+(1*3)+(1+(2+2)))"),3);
 }
+
+TEST(Strings, flipper) {
+    BulbSwitcher flipper;
+
+    EXPECT_EQ(flipper.minFlips(""),0);
+    EXPECT_EQ(flipper.minFlips("0"),0);
+    EXPECT_EQ(flipper.minFlips("1"),1);
+    EXPECT_EQ(flipper.minFlips("00"),0);
+    EXPECT_EQ(flipper.minFlips("001"),1);
+    EXPECT_EQ(flipper.minFlips("101"),3);
+    EXPECT_EQ(flipper.minFlips("10101"),5);
+
+}
+
+

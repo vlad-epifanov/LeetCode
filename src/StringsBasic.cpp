@@ -37,3 +37,16 @@ int NestingDepth::maxDepth(const std::string& s)
 	return maxD;
 }
 
+int BulbSwitcher::minFlips(const string& target)
+{
+    // count all the changes
+    char prevC = '0';
+    int counter = 0;
+    for (auto curC : target) {
+        if (prevC != curC) {
+            counter++;
+            prevC = curC;
+        }
+    }
+    return counter;
+}
