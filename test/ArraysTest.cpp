@@ -58,4 +58,18 @@ TEST(Arrays, testMostWater)
     EXPECT_EQ(mwCalc.maxArea(Vec({1,3,3,2,1,1})), 5);
 }
 
+TEST(Arrays, testMatrixTranspose)
+{
+    TransposeMatrix tx;
+
+    Vec2D res = tx.transpose(Vec2D({{1}}));
+    EXPECT_EQ(res,Vec2D({{1}}));
+    res = tx.transpose(Vec2D({{1,2}}));
+    EXPECT_EQ(res,Vec2D({{1},{2}}));
+    res = tx.transpose(Vec2D({{1},{2}}));
+    EXPECT_EQ(res,Vec2D({{1,2}}));
+    res = tx.transpose(Vec2D({{1,2},{3,4}}));
+    EXPECT_EQ(res,Vec2D({{1,3},{2,4}}));
+}
+
 

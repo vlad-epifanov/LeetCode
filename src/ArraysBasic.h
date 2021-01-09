@@ -34,7 +34,7 @@ public:
 
 
 /*
-1476. Subrectangle Queries
+3) Subrectangle Queries
 https://leetcode.com/problems/subrectangle-queries/
 
 Implement the class SubrectangleQueries which receives a rows x cols rectangle as a matrix of integers in the constructor and supports two methods:
@@ -64,7 +64,7 @@ public:
  */
 
 /*
-11. Container With Most Water
+4) Container With Most Water
 https://leetcode.com/problems/container-with-most-water/
 Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai).
 n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0).
@@ -80,4 +80,14 @@ In this case, the max area of water (blue section) the container can contain is 
 class MostWater {
 public:
     int maxArea(vector<int>& height);
+};
+
+/*
+5) Transpose matrix
+https://leetcode.com/problems/transpose-matrix/
+*/
+
+class TransposeMatrix {
+public:
+    vector<vector<int>> transpose(vector<vector<int>>& A);
 };

@@ -79,7 +79,7 @@ int MostWater::maxArea(vector<int>& height)
 }
 */
 
-//V2: just moving towards bigger from smaller and calc areas along the way
+//V2: just moving towards bigger from smaller and calc areas along the way, O(n)
 int MostWater::maxArea(vector<int>& height)
 {
     int lPos = 0, rPos = height.size()-1;
@@ -94,4 +94,14 @@ int MostWater::maxArea(vector<int>& height)
         }        
     }
     return maxArea;
+}
+
+/************************************************************************************/
+
+vector<vector<int>> TransposeMatrix::transpose(vector<vector<int>>& A)
+{
+    Vec2D result;
+
+
+    return result;
 }
