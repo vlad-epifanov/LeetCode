@@ -91,3 +91,14 @@ class TransposeMatrix {
 public:
     vector<vector<int>> transpose(vector<vector<int>>& A);
 };
+
+/*
+6. Spiral Matrix
+Given an m x n matrix, return all elements of the matrix in spiral order.
+https://leetcode.com/problems/spiral-matrix/
+*/
+
+class SpiralMatrix {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix);
+};

@@ -82,7 +82,7 @@ int MostWater::maxArea(vector<int>& height)
 //V2: just moving towards bigger from smaller and calc areas along the way, O(n)
 int MostWater::maxArea(vector<int>& height)
 {
-    int lPos = 0, rPos = height.size()-1;
+    int lPos = 0, rPos = static_cast<int>(height.size()-1);
     int maxArea = 0;
     while (lPos < rPos) {
         int area = std::min(height[lPos], height[rPos]) * (rPos - lPos);
@@ -100,8 +100,24 @@ int MostWater::maxArea(vector<int>& height)
 
 vector<vector<int>> TransposeMatrix::transpose(vector<vector<int>>& A)
 {
-    Vec2D result;
+    if (A.empty())
+        return Vec2D();
+    const size_t N = A.size();
+    const size_t M = A.front().size();
+    Vec2D result(M,Vec(N));
 
+    for (size_t i = 0; i < M; ++i) {
+        for (size_t j = 0; j < N; ++j) {
+            result[i][j] = A[j][i];
+        }
+    }
 
     return result;
+}
+
+/************************************************************************************/
+
+vector<int> SpiralMatrix::spiralOrder(vector<vector<int>>& matrix)
+{
+    return {};
 }

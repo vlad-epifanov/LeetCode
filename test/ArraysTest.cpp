@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "ArraysBasic.h"
+#include "Arrays/ArraysBasic.h"
 
 using ::testing::_;
 using ::testing::ElementsAre;
