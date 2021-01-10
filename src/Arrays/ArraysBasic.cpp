@@ -115,9 +115,44 @@ vector<vector<int>> TransposeMatrix::transpose(vector<vector<int>>& A)
     return result;
 }
 
-/************************************************************************************/
+/************************************************************************************
+ Possible solutions
+ 1) O(nm) + O(nm) space - "visited" bool matrix, and just go around until hit visited or border
+ 2) O(nm) + O(1) space:
+     - print 1st row
+     - then - go H-1 vertically (down), W-1 horizontally (left), H-2 vert (up), W-2 (right) etc
+     - at every H or W step - we do LastNumSteps-1 + invert the direction.
+*/
 
 vector<int> SpiralMatrix::spiralOrder(vector<vector<int>>& matrix)
 {
-    return {};
+    if (matrix.empty() || matrix.front().empty())
+        return {};
+    int yDist = matrix.size() - 1;
+    int xDist = matrix.front().size();
+
+    vector<int> result;
+    int yDir = 1, xDir = 1;
+    int xPos = -1, yPos = 0;
+
+    while (xDist > 0) {
+        // handle x
+        for (int i = 1; i <= xDist; i++) {
+            xPos += xDir;
+            result.push_back(matrix[yPos][xPos]);
+        }
+        xDir = -xDir;
+        xDist--;
+        // handle y
+        if (yDist <= 0)
+            break;
+        for (int i = 1; i <= yDist; i++) {
+            yPos += yDir;
+            result.push_back(matrix[yPos][xPos]);
+        }
+        yDir = -yDir;
+        yDist--;
+    }
+    
+    return result;
 }

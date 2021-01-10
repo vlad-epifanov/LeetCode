@@ -72,4 +72,23 @@ TEST(Arrays, testMatrixTranspose)
     EXPECT_EQ(res,Vec2D({{1,3},{2,4}}));
 }
 
+TEST(Arrays, testMatrixSpiral)
+{
+    SpiralMatrix smx;
 
+    Vec res = smx.spiralOrder(Vec2D({{1}}));
+    EXPECT_EQ(res,Vec({1}));
+    res = smx.spiralOrder(Vec2D({{1,2}}));
+    EXPECT_EQ(res,Vec({1,2}));
+    res = smx.spiralOrder(Vec2D({{1},{2}}));
+    EXPECT_EQ(res,Vec({1,2}));
+    res = smx.spiralOrder(Vec2D({{1,2,3}}));
+    EXPECT_EQ(res,Vec({1,2,3}));
+    res = smx.spiralOrder(Vec2D({{1},{2},{3}}));
+    EXPECT_EQ(res,Vec({1,2,3}));
+    res = smx.spiralOrder(Vec2D({{1,2},{3,4}}));
+    EXPECT_EQ(res,Vec({1,2,4,3}));
+
+    res = smx.spiralOrder(Vec2D({{1,2,3},{4,5,6},{7,8,9}}));
+    EXPECT_EQ(res,Vec({1,2,3,6,9,8,7,4,5}));
+}
