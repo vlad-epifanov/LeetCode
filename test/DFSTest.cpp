@@ -26,5 +26,18 @@ TEST(DFS, allPathsTest)
     res = agp.allPathsSourceTarget(Graph({{1,2},{3},{4},{},{}}));
     EXPECT_THAT(res, ElementsAre(std::vector<int>({0,2,4})));
 
+}
+
+TEST(DFS, longestIncrPathTest)
+{
+    LongestIncrPath lip;
+    EXPECT_EQ(lip.longestIncreasingPath(Graph()), 0);
+    EXPECT_EQ(lip.longestIncreasingPath(Graph({{1}})), 1);
+    EXPECT_EQ(lip.longestIncreasingPath(Graph({{0}})), 1);
+    EXPECT_EQ(lip.longestIncreasingPath(Graph({{0,2,0}})), 2);
+    EXPECT_EQ(lip.longestIncreasingPath(Graph({{3,2,1}})), 3);
+    EXPECT_EQ(lip.longestIncreasingPath(Graph({{3},{2},{1}})), 3);
+    EXPECT_EQ(lip.longestIncreasingPath(Graph({{1},{2},{1}})), 2);
+    EXPECT_EQ(lip.longestIncreasingPath(Graph({{1,2,3},{4,5,6},{7,8,9}})), 5);
 
 }
