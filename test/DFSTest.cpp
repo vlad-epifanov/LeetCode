@@ -41,3 +41,34 @@ TEST(DFS, longestIncrPathTest)
     EXPECT_EQ(lip.longestIncreasingPath(Graph({{1,2,3},{4,5,6},{7,8,9}})), 5);
 
 }
+
+
+TEST(DFS, regionsBySlashesTest)
+{
+    using Grid = vector<string>;
+    SlashRegions sr;
+    EXPECT_EQ(sr.regionsBySlashes(Grid({"\\"})), 2);
+    EXPECT_EQ(sr.regionsBySlashes(Grid({"/"})), 2);
+    EXPECT_EQ(sr.regionsBySlashes(Grid{" "}), 1);
+    EXPECT_EQ(sr.regionsBySlashes(Grid{" /",
+                                       "/ " }), 2);
+    EXPECT_EQ(sr.regionsBySlashes(Grid{" /",
+                                       "  " }), 1);
+    EXPECT_EQ(sr.regionsBySlashes(Grid{"\\/",
+                                       "/\\" }), 4);
+
+    EXPECT_EQ(sr.regionsBySlashes(Grid{"    ",
+                                       " /\\ ",
+                                       " \\/ ",
+                                       "    " }), 2);
+}
+
+TEST(DFS, roomsAndKeysTest)
+{
+    RoomsAndKeys rak;
+
+    EXPECT_TRUE(rak.canVisitAllRooms(Vec2D({{1},{2},{}})));
+    EXPECT_FALSE(rak.canVisitAllRooms(Vec2D({{1},{2},{1},{3}})));
+    EXPECT_TRUE(rak.canVisitAllRooms(Vec2D({{2,3},{3},{1},{1,2}})));
+    EXPECT_FALSE(rak.canVisitAllRooms(Vec2D({{},{3},{1},{1,2}})));
+}

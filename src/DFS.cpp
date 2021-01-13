@@ -77,3 +77,101 @@ int LongestIncrPath::longestIncreasingPath(Vec2D& matrix)
 }
 
 
+/************************************************/
+// Solution:
+// Left-to-right, Top-to-Bottom
+//
+
+//DFS helper
+int SlashRegions::calcRegions(int i, int j, vector<string>& grid, int numEnds)
+{
+    if (visited_[i][j]) {
+        //loop detected - increase region counter, no need to return ends
+        regCounter_++;
+        return 0;
+    }
+
+
+    visited_[i][j] = true;
+    const char c = grid[i][j];
+    if (c == ' ')
+        return 0;
+
+    /* Here we track the lines
+     Every line should have 2 ends
+     End could be detected if line is touching edge
+     If line is touching visited cell - +2 ends / add a region, since it's a loop - and STOP DFS!
+
+     Search patterns - 6 possible moves every time.
+        \ /
+      \[/]\ 
+      / \
+
+     \ /
+     /[\]/ 
+       / \
+
+     */
+    if (i == 0 || j == 0)
+        numEnds++;
+    if (i == grid.size() || j == grid.front().size())
+        numEnds++;
+    if (numEnds >= 2) {
+        regCounter_++;
+        return 0;
+    }
+
+
+    // if (c == '/') {
+    //     calcRegionsForSlash(i,j,grid,numEnds);
+    // } else {
+    //     calcRegionsForBackslash(i,j,grid,numEnds);
+    // }
+    return 1;
+}
+
+int SlashRegions::regionsBySlashes(vector<string>& grid)
+{
+    regCounter_ = 1;
+    const int M = grid.size();
+    const int N = grid.front().size();
+    visited_.clear();
+    visited_.resize(M, vector<bool>(N, false));
+
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            if (visited_[i][j])
+                continue;
+            calcRegions(i,j,grid);
+        }
+    }
+
+    return regCounter_;
+}
+
+/************************************************/
+// RoomsAndKeys
+// DFS + visited + counter
+
+void RoomsAndKeys::visit(int room, vector<vector<int>>& rooms)
+{
+    if (_visited[room])
+        return;
+    
+    _visited[room] = true;
+    _counter++;
+    for (auto nextRoom : rooms[room]) {
+        this->visit(nextRoom, rooms);
+    }
+}
+
+bool RoomsAndKeys::canVisitAllRooms(vector<vector<int>>& rooms)
+{
+    _visited.clear();
+    _visited.resize(rooms.size(), false);
+    _counter = 0;
+
+    this->visit(0, rooms);
+    
+    return _counter == rooms.size();
+}
