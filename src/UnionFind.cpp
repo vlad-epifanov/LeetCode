@@ -5,48 +5,65 @@
 using namespace std;
 
 /***********************************************************************/
-// Let's use Union-Find with path-compression (no ranking for simplicity)
-//
-vector<int> ProvincesCounter::buildUF(vector<vector<int>>& isConnected)
+UnionFind::UnionFind(const size_t N) : m_data(N)
 {
-    const int N = isConnected.size();
-    vector<int> uf(N);
     for (int i = 0; i < N; i++) {
-        uf[i] = i;
+        m_data[i] = i;
     }
-
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            if (isConnected[i][j]) {
-                uf[find(i,uf)] = find(j,uf);
-            }
-        }
-    }
-    return uf;
 }
-
-int ProvincesCounter::find(const int startNode, vector<int>& uf)
+void UnionFind::unite(const int i, const int j)
 {
-    if (uf[startNode] == startNode) {
-        return startNode;
-    }
-    return uf[startNode] = find(uf[startNode], uf); // simple compression
+    m_data[find(i)] = find(j);
 }
-
-int ProvincesCounter::countRegions(vector<int>& uf)
+int UnionFind::find(const int node)
+{
+    if (m_data[node] == node) {
+        return node;
+    }
+    return m_data[node] = find(m_data[node]); // simple compression
+}
+int UnionFind::countGroups()
 {
     unordered_set<int> parents;
-    for (auto node: uf) {
-        parents.insert(find(node, uf));
+    for (auto node: m_data) {
+        parents.insert(find(node));
     }
-    return parents.size();
+    return static_cast<int>(parents.size());
 }
 
+/***********************************************************************/
+// Let's use Union-Find with path-compression (no ranking for simplicity)
+//
 int ProvincesCounter::findCircleNum(vector<vector<int>>& isConnected)
 {
     if (isConnected.empty() || isConnected.front().empty()) {
         return 0;
     }
-    vector<int> unionFind = buildUF(isConnected);
-    return countRegions(unionFind);
+    const size_t N = isConnected.size();
+    UnionFind uf(N);
+    for (size_t i = 0; i < N; i++) {
+        for (size_t j = 0; j < N; j++) {
+            if (isConnected[i][j]) {
+                uf.unite(i,j);    
+            }
+        }
+    }    
+    return uf.countGroups();
+}
+
+/************************************************/
+// Solution: build UnionFind
+
+UnionFind SlashRegions::buildUF(std::vector<std::string>& grid)
+{
+    const size_t M = grid.size();
+    const size_t N = grid.front().size();
+    UnionFind uf(M*N*4);
+    return uf;
+}
+
+int SlashRegions::regionsBySlashes(vector<string>& grid)
+{
+    auto uf = this->buildUF(grid);
+    return uf.countGroups();
 }

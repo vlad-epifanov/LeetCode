@@ -1,6 +1,15 @@
 #pragma once
 #include "typedefs.h"
 
+class UnionFind {
+        std::vector<int> m_data;
+    public:
+        UnionFind(const size_t N);
+        void unite(const int i, const int j);
+        int find(const int node);
+        int countGroups();
+};
+
 /*
 1. Number of Provinces
 https://leetcode.com/problems/number-of-provinces/
@@ -16,9 +25,19 @@ Output: 2
 */
 
 class ProvincesCounter {
-    std::vector<int> buildUF(std::vector<std::vector<int>>& isConnected);
-    int countRegions(std::vector<int>& uf);
-    int find(const int node, std::vector<int>& uf);
 public:
     int findCircleNum(std::vector<std::vector<int>>& isConnected);
+};
+
+/*
+2.
+https://leetcode.com/problems/regions-cut-by-slashes/
+
+*/
+
+class SlashRegions {
+public:
+    int regionsBySlashes(std::vector<std::string>& grid);
+private:
+    UnionFind buildUF(std::vector<std::string>& grid);
 };

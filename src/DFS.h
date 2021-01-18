@@ -56,22 +56,6 @@ public:
 };
 
 /*
-3.
-https://leetcode.com/problems/regions-cut-by-slashes/
-
-*/
-
-class SlashRegions {
-public:
-    int regionsBySlashes(vector<string>& grid);
-private:
-    int calcRegions(int i, int j, vector<string>& grid, int numEnds = 0);
-
-    vector<vector<bool>>    visited_;
-    int                     regCounter_;
-};
-
-/*
 4. Keys and rooms
 https://leetcode.com/problems/keys-and-rooms/
 

@@ -2,19 +2,6 @@
 #include <set>
 
 class RunningMedian {
-        void rebalance() {
-            // Assumption: rebalance is always called after adding single element
-            // so it is not possible to have difference > 2
-            if (m_top.size() > m_bottom.size() + 1) {
-                auto val = *m_top.begin();
-                m_bottom.insert(val);
-                m_top.erase(m_top.find(val));
-            } else if (m_bottom.size() > m_top.size() + 1) {
-                auto val = *m_bottom.begin();
-                m_top.insert(val);
-                m_bottom.erase(m_bottom.find(val));
-            }
-        }
     public:
         RunningMedian() {}
 
@@ -55,13 +42,27 @@ class RunningMedian {
         }
 
     private:
+        void rebalance() {
+            // Assumption: rebalance is always called after adding single element
+            // so it is not possible to have difference > 2
+            if (m_top.size() > m_bottom.size() + 1) {
+                auto val = *m_top.begin();
+                m_bottom.insert(val);
+                m_top.erase(m_top.find(val));
+            } else if (m_bottom.size() > m_top.size() + 1) {
+                auto val = *m_bottom.begin();
+                m_top.insert(val);
+                m_bottom.erase(m_bottom.find(val));
+            }
+        }
+    private:
         multiset<int,greater<int>> m_bottom;
         multiset<int,less<int>> m_top;
 };
 
 vector<double> SlidingMedian::medianSlidingWindow(vector<int>& nums, int k)
 {
-    const int N = nums.size();
+    const size_t N = nums.size();
     vector<double> result(N-k+1);
 
     RunningMedian rm;
@@ -70,7 +71,7 @@ vector<double> SlidingMedian::medianSlidingWindow(vector<int>& nums, int k)
     }
     result[0] = rm.getMedian();
 
-    for (int i = 1; i <= N-k; i++) {
+    for (size_t i = 1; i <= N-k; i++) {
         rm.remove(nums[i-1]);
         rm.add(nums[k+i-1]);
         result[i] = rm.getMedian();

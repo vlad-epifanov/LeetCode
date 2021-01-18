@@ -42,27 +42,6 @@ TEST(DFS, longestIncrPathTest)
 
 }
 
-
-TEST(DFS, regionsBySlashesTest)
-{
-    using Grid = vector<string>;
-    SlashRegions sr;
-    EXPECT_EQ(sr.regionsBySlashes(Grid({"\\"})), 2);
-    EXPECT_EQ(sr.regionsBySlashes(Grid({"/"})), 2);
-    EXPECT_EQ(sr.regionsBySlashes(Grid{" "}), 1);
-    EXPECT_EQ(sr.regionsBySlashes(Grid{" /",
-                                       "/ " }), 2);
-    EXPECT_EQ(sr.regionsBySlashes(Grid{" /",
-                                       "  " }), 1);
-    EXPECT_EQ(sr.regionsBySlashes(Grid{"\\/",
-                                       "/\\" }), 4);
-
-    EXPECT_EQ(sr.regionsBySlashes(Grid{"    ",
-                                       " /\\ ",
-                                       " \\/ ",
-                                       "    " }), 2);
-}
-
 TEST(DFS, roomsAndKeysTest)
 {
     RoomsAndKeys rak;
