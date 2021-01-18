@@ -2,12 +2,12 @@
 #include "typedefs.h"
 
 class UnionFind {
-        std::vector<int> m_data;
+        std::vector<size_t> m_data;
     public:
         UnionFind(const size_t N);
-        void unite(const int i, const int j);
-        int find(const int node);
-        int countGroups();
+        void unite(const size_t i, const size_t j);
+        size_t find(const size_t node);
+        size_t countGroups();
 };
 
 /*
@@ -40,4 +40,19 @@ public:
     int regionsBySlashes(std::vector<std::string>& grid);
 private:
     UnionFind buildUF(std::vector<std::string>& grid);
+    inline size_t getLowerIdx(const size_t i, const size_t j) {
+        return (i * m_N + j) * 4 + 3;
+    }
+    inline size_t getUpperIdx(const size_t i, const size_t j) {
+        return (i * m_N + j) * 4;
+    }
+    inline size_t getLeftIdx(const size_t i, const size_t j) {
+        return (i * m_N + j) * 4 + 1;
+    }
+    inline size_t getRightIdx(const size_t i, const size_t j) {
+        return (i * m_N + j) * 4 + 2;
+    }
+    void processCell(const size_t i, const size_t j, UnionFind& uf, const char c);
+private:
+    size_t m_N = 0;
 };

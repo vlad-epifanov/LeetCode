@@ -11,24 +11,24 @@ UnionFind::UnionFind(const size_t N) : m_data(N)
         m_data[i] = i;
     }
 }
-void UnionFind::unite(const int i, const int j)
+void UnionFind::unite(const size_t i, const size_t j)
 {
     m_data[find(i)] = find(j);
 }
-int UnionFind::find(const int node)
+size_t UnionFind::find(const size_t node)
 {
     if (m_data[node] == node) {
         return node;
     }
     return m_data[node] = find(m_data[node]); // simple compression
 }
-int UnionFind::countGroups()
+size_t UnionFind::countGroups()
 {
-    unordered_set<int> parents;
+    unordered_set<size_t> parents;
     for (auto node: m_data) {
         parents.insert(find(node));
     }
-    return static_cast<int>(parents.size());
+    return parents.size();
 }
 
 /***********************************************************************/
@@ -48,22 +48,67 @@ int ProvincesCounter::findCircleNum(vector<vector<int>>& isConnected)
             }
         }
     }    
-    return uf.countGroups();
+    return static_cast<int>(uf.countGroups());
 }
 
 /************************************************/
 // Solution: build UnionFind
 
+void SlashRegions::processCell(const size_t i, const size_t j, UnionFind& uf, const char c)
+{
+    auto upNode = this->getUpperIdx(i,j);
+    auto lowNode = this->getLowerIdx(i,j);
+    auto leftNode = this->getLeftIdx(i,j);
+    auto rightNode = this->getRightIdx(i,j);
+    switch (c) {
+        case ' ':
+            uf.unite(upNode, lowNode);
+            uf.unite(leftNode, rightNode);
+            uf.unite(leftNode, upNode);
+            break;
+        case '/':
+            uf.unite(upNode, leftNode);
+            uf.unite(rightNode, lowNode);
+            break;
+        case '\\':
+            uf.unite(upNode, rightNode);
+            uf.unite(leftNode, lowNode);
+            break;
+    };
+}
+
 UnionFind SlashRegions::buildUF(std::vector<std::string>& grid)
 {
     const size_t M = grid.size();
-    const size_t N = grid.front().size();
+    const size_t N = grid.front().length();
     UnionFind uf(M*N*4);
+    /*
+    Every cell in original grid is represented like this in UF:
+    \ 0 /
+    1 X 2
+    / 3 \
+    So we'll build UF by:
+    1) Process cell itself
+    2) Merge with right cell
+    3) Merge with left cell
+    */
+    for (size_t i = 0; i < M; i++) {
+        for (size_t j = 0; j < N; j++) {
+            processCell(i,j,uf,grid[i][j]);
+            if (i < M-1) {
+                uf.unite(getLowerIdx(i,j),getUpperIdx(i+1,j));
+            }
+            if (j < N-1) {
+                uf.unite(getRightIdx(i,j),getLeftIdx(i,j+1));
+            }            
+        }
+    }
     return uf;
 }
 
 int SlashRegions::regionsBySlashes(vector<string>& grid)
 {
+    m_N = grid.front().size();
     auto uf = this->buildUF(grid);
-    return uf.countGroups();
+    return static_cast<int>(uf.countGroups());
 }
