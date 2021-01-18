@@ -102,3 +102,36 @@ bool RoomsAndKeys::canVisitAllRooms(vector<vector<int>>& rooms)
     
     return _counter == rooms.size();
 }
+
+/************************************************/
+
+int MaxAreaIsland::getIslandArea(const int i, const int j, vector<vector<int>>& grid)
+{
+    if (i < 0 || j < 0 || i >= grid.size() || j >= grid.front().size() || !grid[i][j]) {
+        return 0;
+    }
+    grid[i][j] = 0;
+    return 1 + getIslandArea(i+1, j, grid) + getIslandArea(i-1, j, grid) + 
+               getIslandArea(i, j+1, grid) + getIslandArea(i, j-1, grid);
+}
+
+int MaxAreaIsland::maxAreaOfIsland(vector<vector<int>>& grid)
+{
+    const size_t N = grid.size();
+    const size_t M = grid.front().size();
+    
+    int maxArea = 0;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            if (grid[i][j] == 1) {
+                maxArea = std::max(getIslandArea(i,j,grid), maxArea);
+            }
+        }        
+    }
+
+    return maxArea;
+}
+
+
+
+/************************************************/

@@ -51,3 +51,18 @@ TEST(DFS, roomsAndKeysTest)
     EXPECT_TRUE(rak.canVisitAllRooms(Vec2D({{2,3},{3},{1},{1,2}})));
     EXPECT_FALSE(rak.canVisitAllRooms(Vec2D({{},{3},{1},{1,2}})));
 }
+
+TEST(DFS, maxAreaIslandTest)
+{
+    MaxAreaIsland mai;
+
+    EXPECT_EQ(mai.maxAreaOfIsland(Vec2D({{}})), 0);
+    EXPECT_EQ(mai.maxAreaOfIsland(Vec2D({{0}})), 0);
+    EXPECT_EQ(mai.maxAreaOfIsland(Vec2D({{1}})), 1);
+    EXPECT_EQ(mai.maxAreaOfIsland(Vec2D({{0,1,1,0,1,0}})), 2);
+
+    EXPECT_EQ(mai.maxAreaOfIsland(Vec2D({{1,0},{0,1}})), 1);
+    EXPECT_EQ(mai.maxAreaOfIsland(Vec2D({{1,0},{1,1}})), 3);
+
+    EXPECT_EQ(mai.maxAreaOfIsland(Vec2D({{1,0,0},{0,1,1},{0,1,1}})), 4);
+}

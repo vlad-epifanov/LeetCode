@@ -76,3 +76,18 @@ private:
     vector<bool>    _visited;
     int             _counter;
 };
+
+/*
+5) Max area of the island
+
+https://leetcode.com/problems/max-area-of-island/
+*/
+
+class MaxAreaIsland {
+    //DFS method
+    int getIslandArea(const int i, const int j, vector<vector<int>>& grid);
+public:
+    int maxAreaOfIsland(vector<vector<int>>& grid);
+};
+
+
