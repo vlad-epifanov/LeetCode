@@ -66,3 +66,16 @@ TEST(DFS, maxAreaIslandTest)
 
     EXPECT_EQ(mai.maxAreaOfIsland(Vec2D({{1,0,0},{0,1,1},{0,1,1}})), 4);
 }
+
+TEST(DFS, jumpGameTest)
+{
+    JumpGame jm;
+
+    EXPECT_TRUE(jm.canReach(Vec({0}),0));
+    EXPECT_TRUE(jm.canReach(Vec({1,0}),0));
+    EXPECT_TRUE(jm.canReach(Vec({1,0}),1));
+    EXPECT_TRUE(jm.canReach(Vec({0,1,0}),1));
+    EXPECT_TRUE(jm.canReach(Vec({0,1,0,2}),3));
+    EXPECT_FALSE(jm.canReach(Vec({6,1,5,2}),3));
+    EXPECT_TRUE(jm.canReach(Vec({4,2,3,0,3,1,2}),0));
+}

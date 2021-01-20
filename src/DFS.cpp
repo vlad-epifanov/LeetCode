@@ -132,6 +132,26 @@ int MaxAreaIsland::maxAreaOfIsland(vector<vector<int>>& grid)
     return maxArea;
 }
 
+/************************************************/
 
+bool JumpGame::locCanReach(vector<int>& arr, int start)
+{
+    if (start < 0 || start >= arr.size() || m_visited[start]) {
+        return false;
+    }
+    if (arr[start] == 0) {
+        return true;
+    }
+    m_visited[start] = true;
+    return locCanReach(arr, start + arr[start]) || locCanReach(arr, start - arr[start]);
+}
+
+bool JumpGame::canReach(vector<int>& arr, int start)
+{
+    m_visited.clear();
+    m_visited.resize(arr.size(),false);
+
+    return locCanReach(arr, start);
+}
 
 /************************************************/

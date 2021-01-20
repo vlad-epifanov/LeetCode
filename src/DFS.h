@@ -90,4 +90,16 @@ public:
     int maxAreaOfIsland(vector<vector<int>>& grid);
 };
 
+/*
+6) Jump Game
 
+https://leetcode.com/problems/jump-game-iii/
+*/
+
+class JumpGame {
+public:
+    bool canReach(vector<int>& arr, int start);
+private:
+    bool locCanReach(vector<int>& arr, int start);
+    vector<bool> m_visited;
+};
