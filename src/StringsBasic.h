@@ -60,3 +60,13 @@ class BulbSwitcher {
 public:
     int minFlips(const string& target);
 };
+
+/***************************************
+ * 4) Balanced brackets
+ * https://leetcode.com/problems/valid-parentheses/
+***********************************************************************/
+
+class BalanceChecker {
+public:
+    bool isValid(string s);
+};

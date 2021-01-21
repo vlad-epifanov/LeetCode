@@ -2,6 +2,8 @@
 
 #include "StringsBasic.h"
 #include <cassert>
+#include <stack>
+
 
 using namespace std;
 
@@ -50,3 +52,26 @@ int BulbSwitcher::minFlips(const string& target)
     }
     return counter;
 }
+
+/************************************************************************************/
+// Straightforward - Stack
+// O(n) + O(n)
+
+bool areMatching(char cl, char cr) {
+    return (cl == '{' && cr == '}') || (cl == '[' && cr == ']') || (cl == '(' && cr == ')');
+}
+
+bool BalanceChecker::isValid(string s)
+{
+    std::stack<char> brackets;
+    for (char c: s) {
+        if (!brackets.empty() && areMatching(brackets.top(), c)) {
+            brackets.pop();
+        } else {
+            brackets.push(c);
+        }
+    }
+    return brackets.empty();
+}
+
+/************************************************************************************/

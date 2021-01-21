@@ -55,4 +55,17 @@ TEST(Strings, flipper) {
 
 }
 
+TEST(Strings, validBracketsTest) {
 
+    BalanceChecker checker;
+
+    EXPECT_FALSE(checker.isValid("("));
+    EXPECT_FALSE(checker.isValid("((("));
+    EXPECT_FALSE(checker.isValid(")((("));
+    EXPECT_TRUE(checker.isValid("()()"));
+    EXPECT_TRUE(checker.isValid("(){}()"));
+    EXPECT_FALSE(checker.isValid("([{}()]"));
+    EXPECT_FALSE(checker.isValid("(]"));
+    EXPECT_FALSE(checker.isValid("([)]"));
+    EXPECT_TRUE(checker.isValid("{[]}"));
+}
