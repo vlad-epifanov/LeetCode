@@ -154,3 +154,26 @@ TEST(DP, MXOnesCounter)
     EXPECT_EQ(smc.numSubmat(Vec2D({{1,1,0},{1,0,1},{1,1,1}})),15);
     EXPECT_EQ(smc.numSubmat(Vec2D({{1,0,1,1,0,1},{0,1,1,1,0,1}})),16);
 }
+
+
+TEST(DP, LVPTest)
+{
+    LVP lvp;
+    EXPECT_EQ(lvp.longestValidParentheses(string("")),0);
+    EXPECT_EQ(lvp.longestValidParentheses(string("(")),0);
+    EXPECT_EQ(lvp.longestValidParentheses(string(")")),0);
+    EXPECT_EQ(lvp.longestValidParentheses(string(")(")),0);
+    EXPECT_EQ(lvp.longestValidParentheses(string("))")),0);
+    EXPECT_EQ(lvp.longestValidParentheses(string("(((")),0);
+    EXPECT_EQ(lvp.longestValidParentheses(string("())")),2);
+    EXPECT_EQ(lvp.longestValidParentheses(string("))()((")),2);
+    EXPECT_EQ(lvp.longestValidParentheses(string("))()((")),2);
+    EXPECT_EQ(lvp.longestValidParentheses(string("()()")),4);
+    EXPECT_EQ(lvp.longestValidParentheses(string("(()()((")),4);
+    EXPECT_EQ(lvp.longestValidParentheses(string("((()()(()")),4);
+    EXPECT_EQ(lvp.longestValidParentheses(string("((()()))(")),8);
+    EXPECT_EQ(lvp.longestValidParentheses(string("(((())))")),8);
+    EXPECT_EQ(lvp.longestValidParentheses(string(")(((())))(((())))(((())))(((())))(")),32);
+
+}
+

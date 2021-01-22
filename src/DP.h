@@ -260,3 +260,22 @@ class SubmatrixCounter {
 public:
     int numSubmat(vector<vector<int>>& mat);
 };
+
+
+/*
+32. Longest Valid Parentheses
+(Hard)
+https://leetcode.com/problems/longest-valid-parentheses/
+
+Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
+*/
+ 
+class LVP {
+public:
+    int longestValidParentheses(string& s);
+private:
+    int getMaxValidSubString(string& s, const size_t pos);
+private:    
+    int m_curMaxLen;
+    vector<int> m_lvpCache;
+};

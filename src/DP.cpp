@@ -312,3 +312,85 @@ int SubmatrixCounter::numSubmat(vector<vector<int>>& mat)
     }
     return totalCount;
 }
+
+/********************************************************************************/
+/* Solution:
+   - Iterate through the string
+   - At the every step - check whether we can build a valid string like this:
+    ( + <Valid Substring> + )
+    () + <Valid Substring>
+    This way we can leverage recursion / DP
+*/
+
+int LVP::getMaxValidSubString(string& s, const size_t pos)
+{
+    if (pos >= s.length()-1 ||  s[pos] == ')')
+        return 0;
+
+    if (m_lvpCache[pos] >= 0)
+        return m_lvpCache[pos];
+
+    int inLength = getMaxValidSubString(s, pos+1);
+    m_lvpCache[pos+1] = inLength;
+
+    if (pos + inLength + 1 >= s.length())
+        return 0;
+
+    if (s[pos + inLength + 1] != ')')
+        return 0;
+    
+    int nextLength = 0;
+    size_t nextPos = pos + inLength + 2;
+    if (nextPos < s.length()) {
+        nextLength = getMaxValidSubString(s, nextPos);
+        m_lvpCache[nextPos] = nextLength;
+    }
+
+    int totalLength = 2 + inLength + nextLength;
+    m_lvpCache[pos] = totalLength;
+    return totalLength;
+}
+
+int LVP::longestValidParentheses(string& s)
+{
+    if (s.empty())
+        return 0;
+    m_curMaxLen = 0;
+    m_lvpCache.clear();
+    m_lvpCache.resize(s.size(),-1);
+
+    for (size_t i = 0; i < s.size(); i++) {
+        int len = getMaxValidSubString(s,i);
+        m_curMaxLen = std::max(m_curMaxLen, len);
+        i += len;
+    }
+
+    return m_curMaxLen;
+}
+
+/* Another version of LVP: just stack *eating* up valid strings and tracking max length during eating up*/
+/*
+int longestValidParentheses(string s) {
+	int maxi=0;
+	stack<int> st;
+	for(int i=0;i<s.length();i++)
+	{
+		if(s[i]=='(')
+			st.push(i);
+		else
+		{
+			if(!st.empty()&&s[st.top()]=='(')
+			{
+				st.pop();
+				if(st.empty())
+					maxi=max(maxi,i+1);
+				else
+					maxi=max(maxi,i-st.top());
+			}
+			else
+				st.push(i);
+		}
+	}
+	return maxi;
+}
+*/
