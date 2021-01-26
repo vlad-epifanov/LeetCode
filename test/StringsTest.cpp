@@ -59,13 +59,25 @@ TEST(Strings, validBracketsTest) {
 
     BalanceChecker checker;
 
-    EXPECT_FALSE(checker.isValid("("));
-    EXPECT_FALSE(checker.isValid("((("));
-    EXPECT_FALSE(checker.isValid(")((("));
-    EXPECT_TRUE(checker.isValid("()()"));
-    EXPECT_TRUE(checker.isValid("(){}()"));
-    EXPECT_FALSE(checker.isValid("([{}()]"));
-    EXPECT_FALSE(checker.isValid("(]"));
-    EXPECT_FALSE(checker.isValid("([)]"));
-    EXPECT_TRUE(checker.isValid("{[]}"));
+    EXPECT_FALSE(checker.isValid(string("(")));
+    EXPECT_FALSE(checker.isValid(string("(((")));
+    EXPECT_FALSE(checker.isValid(string(")(((")));
+    EXPECT_TRUE(checker.isValid(string("()()")));
+    EXPECT_TRUE(checker.isValid(string("(){}()")));
+    EXPECT_FALSE(checker.isValid(string("([{}()]")));
+    EXPECT_FALSE(checker.isValid(string("(]")));
+    EXPECT_FALSE(checker.isValid(string("([)]")));
+    EXPECT_TRUE(checker.isValid(string("{[]}")));
+}
+
+TEST(Strings, MinStepToAnagramTest) {
+
+    MinStepToAnagram stepCounter;
+
+    EXPECT_EQ(stepCounter.minSteps(string("a"), string("a")),0);
+    EXPECT_EQ(stepCounter.minSteps(string("a"), string("b")),1);
+    EXPECT_EQ(stepCounter.minSteps(string("abc"), string("baa")),1);
+    EXPECT_EQ(stepCounter.minSteps(string("abc"), string("def")),3);
+    EXPECT_EQ(stepCounter.minSteps(string("abc"), string("cab")),0);
+
 }

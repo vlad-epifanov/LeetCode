@@ -19,7 +19,7 @@ Output: "1[.]1[.]1[.]1"
 
 class EXPORT_SYM IP4Defang {
 public:
-    std::string defangIPaddr(const std::string& address);
+    string defangIPaddr(const string& address);
 };
 
 
@@ -28,7 +28,7 @@ public:
 ***************************************/
 class NestingDepth {
 public:
-    int maxDepth(const std::string& s);
+    int maxDepth(const string& s);
 };
 
 /***************************************
@@ -68,5 +68,15 @@ public:
 
 class BalanceChecker {
 public:
-    bool isValid(string s);
+    bool isValid(string& s);
+};
+
+/*
+5. Minimum Number of Steps to Make Two Strings Anagram
+https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/
+*/
+
+class MinStepToAnagram {
+public:
+    int minSteps(const string& s, const string& t);
 };

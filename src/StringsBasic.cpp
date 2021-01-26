@@ -57,11 +57,12 @@ int BulbSwitcher::minFlips(const string& target)
 // Straightforward - Stack
 // O(n) + O(n)
 
-bool areMatching(char cl, char cr) {
+bool areMatching(char cl, char cr)
+{
     return (cl == '{' && cr == '}') || (cl == '[' && cr == ']') || (cl == '(' && cr == ')');
 }
 
-bool BalanceChecker::isValid(string s)
+bool BalanceChecker::isValid(string& s)
 {
     std::stack<char> brackets;
     for (char c: s) {
@@ -73,5 +74,30 @@ bool BalanceChecker::isValid(string s)
     }
     return brackets.empty();
 }
+
+/************************************************************************************/
+
+int MinStepToAnagram::minSteps(const string& s, const string& t)
+{
+    if ((s.size() != t.size())) 
+        return -1;
+    if (s.empty())
+        return 0;
+    vector<int> sCache(26,0);
+    vector<int> tCache(26,0);
+
+    for (auto c : s)
+        sCache[c-'a']++;
+    for (auto c : t)
+        tCache[c-'a']++;
+
+    int steps = 0;
+    for (int i = 0; i < 26; i++) {
+        steps += std::abs(sCache[i] - tCache[i]);
+    }
+
+    return steps / 2;
+}
+
 
 /************************************************************************************/
