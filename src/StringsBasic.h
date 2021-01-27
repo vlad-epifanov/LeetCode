@@ -80,3 +80,13 @@ class MinStepToAnagram {
 public:
     int minSteps(const string& s, const string& t);
 };
+
+/*
+6. Minimum Swaps to Make Strings Equal
+https://leetcode.com/problems/minimum-swaps-to-make-strings-equal/
+*/
+
+class StrSwap {
+public:
+    int minimumSwap(const string& s1, const string& s2);
+};

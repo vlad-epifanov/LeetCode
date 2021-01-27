@@ -79,5 +79,18 @@ TEST(Strings, MinStepToAnagramTest) {
     EXPECT_EQ(stepCounter.minSteps(string("abc"), string("baa")),1);
     EXPECT_EQ(stepCounter.minSteps(string("abc"), string("def")),3);
     EXPECT_EQ(stepCounter.minSteps(string("abc"), string("cab")),0);
+}
+
+TEST(Strings, StrSwapTest)
+{
+    StrSwap swapper;
+    EXPECT_EQ(swapper.minimumSwap(string("x"), string("y")),-1);
+    EXPECT_EQ(swapper.minimumSwap(string("xy"), string("yx")),2);
+    EXPECT_EQ(swapper.minimumSwap(string("x"), string("x")),0);
+    EXPECT_EQ(swapper.minimumSwap(string("xx"), string("yy")),1);
+    EXPECT_EQ(swapper.minimumSwap(string("xx"), string("yx")),-1);
+    EXPECT_EQ(swapper.minimumSwap(string("xxyy"), string("yyxx")),2);
+    EXPECT_EQ(swapper.minimumSwap(string("xxxyyy"), string("yyyxxx")),4);
+    EXPECT_EQ(swapper.minimumSwap(string("xxyyxyxyxx"), string("xyyxyxxxyx")),4);
 
 }
