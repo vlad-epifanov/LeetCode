@@ -1,5 +1,7 @@
 #include "BinaryTree.h"
 
+#include <queue>
+
 using namespace std;
 
 /************************************************************************************************/
@@ -83,4 +85,39 @@ bool FlipChecker::flipEquiv(TreeNode* root1, TreeNode* root2)
         return false;
 
     return flipEquivSubtree(root1, root2);
+}
+
+/************************************************************************************************/
+
+int MaxLevelSum::maxLevelSum(TreeNode* root)
+{
+    if (!root)
+        return 0;
+
+    int curMax=INT_MIN, maxLevel, curLevel = 0;
+    
+    queue<TreeNode*> nodeQueue;
+    nodeQueue.push(root);
+    
+    while(!nodeQueue.empty()){
+        int curSum = 0, numNodes = nodeQueue.size();
+        curLevel++;
+
+        while(numNodes--){
+            TreeNode *p = nodeQueue.front();
+            curSum += p->val;
+            if(p->left)
+                nodeQueue.push(p->left);
+            if(p->right)
+                nodeQueue.push(p->right);
+            nodeQueue.pop();
+        }
+        
+        if(curMax < curSum){
+            curMax = curSum;
+            maxLevel = curLevel;
+        }
+    }
+    
+    return maxLevel; 
 }

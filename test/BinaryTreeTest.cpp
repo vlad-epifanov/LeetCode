@@ -2,6 +2,8 @@
 #include "gmock/gmock.h"
 #include "BinaryTree.h"
 
+using TreePtr = std::unique_ptr<TreeNode, decltype(&releaseTree)>;
+
 TEST(BinaryTree, flipEqTest)
 {
     FlipChecker fc;
@@ -44,3 +46,30 @@ TEST(BinaryTree, flipEqTest)
 
 }
 
+TEST(BinaryTree, maxLevelSumTest)
+{
+    MaxLevelSum mls;
+    TreeSerializer ts;
+
+    TreePtr root1(ts.deserializeTree(Vec({})), &releaseTree);
+    EXPECT_EQ(mls.maxLevelSum(root1.get()),0);
+
+    root1 = TreePtr(ts.deserializeTree(Vec({1})), &releaseTree);
+    EXPECT_EQ(mls.maxLevelSum(root1.get()),1);
+
+    root1 = TreePtr(ts.deserializeTree(Vec({-10})), &releaseTree);
+    EXPECT_EQ(mls.maxLevelSum(root1.get()),1);
+
+    root1 = TreePtr(ts.deserializeTree(Vec({1,2,3})), &releaseTree);
+    EXPECT_EQ(mls.maxLevelSum(root1.get()),2);
+
+    root1 = TreePtr(ts.deserializeTree(Vec({1,2,-3})), &releaseTree);
+    EXPECT_EQ(mls.maxLevelSum(root1.get()),1);
+
+    root1 = TreePtr(ts.deserializeTree(Vec({1,10,10,-5,6,INT_MAX,10})), &releaseTree);
+    EXPECT_EQ(mls.maxLevelSum(root1.get()),2);
+
+    root1 = TreePtr(ts.deserializeTree(Vec({1,-10,10,-5,6,INT_MAX,10})), &releaseTree);
+    EXPECT_EQ(mls.maxLevelSum(root1.get()),3);
+
+}
