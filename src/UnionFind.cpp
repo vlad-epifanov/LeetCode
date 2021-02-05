@@ -2,7 +2,7 @@
 #include <unordered_set>
 
 // Used only for quick copy-paste to LeetCode - avoid in production!
-using namespace std;
+
 
 /***********************************************************************/
 UnionFind::UnionFind(const size_t N) : m_data(N)

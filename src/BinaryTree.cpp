@@ -2,7 +2,7 @@
 
 #include <queue>
 
-using namespace std;
+
 
 /************************************************************************************************/
 // Auxiliary classes and functions for trees

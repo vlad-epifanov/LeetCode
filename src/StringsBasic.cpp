@@ -5,7 +5,7 @@
 #include <stack>
 
 
-using namespace std;
+
 
 string IP4Defang::defangIPaddr(const string& address)
 {

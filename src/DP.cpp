@@ -3,7 +3,7 @@
 #include <numeric>
 #include <algorithm>
 
-using namespace std;
+
 
 bool DivGame::divisorGame(int N)
 {

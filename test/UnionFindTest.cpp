@@ -2,7 +2,7 @@
 #include "gmock/gmock.h"
 #include "UnionFind.h"
 
-using namespace std;
+
 
 TEST(UnionFind, provincesTest)
 {

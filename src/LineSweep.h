@@ -3,7 +3,7 @@
 #include <map>
 
 // Used only for quick copy-paste to LeetCode - avoid in production!
-using namespace std;
+
 
 /*
 1. SkyLine problem
