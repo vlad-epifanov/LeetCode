@@ -30,9 +30,16 @@ private:
     using NodePtr = shared_ptr<Node>;
 
     struct Node {
-        vector<NodePtr> children;
-        char val;
+        void insert(const string& word, const size_t index);
+        bool search(const string& word, const size_t index);
+        bool startsWith(const string& word, const size_t index);
+
+        //vector<NodePtr> children;
+        unordered_map<char, NodePtr> m_children;
+        //char val;
+        bool m_lastWordLetter = false;
     };
 
-    unordered_map<char,NodePtr> m_rootMap;
+    NodePtr m_rootNode;
+    //unordered_map<char,NodePtr> m_rootMap;
 };
