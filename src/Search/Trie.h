@@ -12,9 +12,54 @@
 https://leetcode.com/problems/implement-trie-prefix-tree/
 */
 
+class Node {
+public:
+    Node();
+    void insert(const string& word, const size_t index);
+    bool search(const string& word, const size_t index);
+    bool startsWith(const string& word, const size_t index);
+private:
+    unordered_map<char, shared_ptr<Node>> m_children;
+    bool m_lastWordLetter;
+};
+
+class RawNode {
+public:
+    RawNode();
+    ~RawNode();
+    void insert(const string& word, const size_t index);
+    bool search(const string& word, const size_t index);
+    bool startsWith(const string& word, const size_t index);
+private:
+    unordered_map<char, RawNode*> m_children;
+    bool m_lastWordLetter;
+};
+
+using NodePtr = RawNode*;
+
+class RecursiveTrie {
+public:
+    RecursiveTrie();
+    ~RecursiveTrie();
+    
+    /** Inserts a word into the trie. */
+    void insert(const string& word);
+    
+    /** Returns if the word is in the trie. */
+    bool search(const string& word);
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    bool startsWith(const string& prefix);
+
+private:
+    NodePtr m_rootNode;
+};
+
+/********************************************************************************************/
 class Trie {
 public:
     Trie();
+    ~Trie();
     
     /** Inserts a word into the trie. */
     void insert(const string& word);
@@ -28,18 +73,15 @@ public:
 private:
     struct Node;
     using NodePtr = shared_ptr<Node>;
-
     struct Node {
-        void insert(const string& word, const size_t index);
+        Node();
+        //void insert(const string& word, const size_t index);
         bool search(const string& word, const size_t index);
         bool startsWith(const string& word, const size_t index);
 
-        //vector<NodePtr> children;
-        unordered_map<char, NodePtr> m_children;
-        //char val;
-        bool m_lastWordLetter = false;
+        vector<NodePtr> m_children;
+        bool m_lastWordLetter;
     };
 
     NodePtr m_rootNode;
-    //unordered_map<char,NodePtr> m_rootMap;
 };
