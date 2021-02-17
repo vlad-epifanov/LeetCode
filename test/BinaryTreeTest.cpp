@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "BinaryTree.h"
+#include "Trees/BinaryTree.h"
 
 using TreePtr = std::unique_ptr<TreeNode, decltype(&releaseTree)>;
 

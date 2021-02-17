@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "DFS.h"
+#include "Search/DFS.h"
 
 using ::testing::_;
 using ::testing::ElementsAre;

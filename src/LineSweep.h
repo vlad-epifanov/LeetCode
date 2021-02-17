@@ -2,9 +2,6 @@
 #include "typedefs.h"
 #include <map>
 
-// Used only for quick copy-paste to LeetCode - avoid in production!
-
-
 /*
 1. SkyLine problem
 https://leetcode.com/problems/the-skyline-problem/

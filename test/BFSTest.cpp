@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "BFS.h"
+#include "Search/BFS.h"
 
 #include <memory>
 
