@@ -18,4 +18,8 @@ public:
     void put(int key, int value);
 
 private:
+    int _capacity;
+    using RAQueue = std::list<pair<int,int>>;
+    RAQueue _queue;
+    std::unordered_map<int,RAQueue::iterator> _storage;
 };
