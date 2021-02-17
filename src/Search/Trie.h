@@ -65,20 +65,17 @@ public:
     void insert(const string& word);
     
     /** Returns if the word is in the trie. */
-    bool search(const string& word);
+    bool search(const string& word) const;
     
     /** Returns if there is any word in the trie that starts with the given prefix. */
-    bool startsWith(const string& prefix);
+    bool startsWith(const string& prefix) const;
 
 private:
     struct Node;
-    using NodePtr = shared_ptr<Node>;
+    using NodePtr = Node*;
     struct Node {
         Node();
-        //void insert(const string& word, const size_t index);
-        bool search(const string& word, const size_t index);
-        bool startsWith(const string& word, const size_t index);
-
+        ~Node();
         vector<NodePtr> m_children;
         bool m_lastWordLetter;
     };
